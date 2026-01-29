@@ -151,6 +151,43 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <p class="section-subtitle">Waxa macaamiisheenu ka yiraahdaan</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"SHAAX products transformed my skin completely! The face wash is so gentle yet effective."</p>
+                    <p class="somali-text">"Alaabta SHAAX ayaa maqaarkayga si buuxda u beddelay! Shaax maqaarku aad buu u jilicsan yahay."</p>
+                    <div class="customer-info">
+                        <strong>Amina Hassan</strong>
+                        <span>Hargeisa, Somaliland</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Best skincare brand I've ever used. Natural ingredients that actually work!"</p>
+                    <p class="somali-text">"Waa shirkadda ugu fiican ee maqaarka ee aan weligay isticmaalay. Alaabta dabiiciga ah oo shaqeysa!"</p>
+                    <div class="customer-info">
+                        <strong>Fadumo Ahmed</strong>
+                        <span>Mogadishu, Somalia</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"My skin has never looked better. SHAAX is now part of my daily routine."</p>
+                    <p class="somali-text">"Maqaarkaygu weligii ma uu ekayn sidaan. SHAAX waxay noqotay qayb ka mid ah hawlahayga maalinlaha ah."</p>
+                    <div class="customer-info">
+                        <strong>Khadija Omar</strong>
+                        <span>London, UK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Category Information -->
     <section class="category-info">
         <div class="container">
@@ -237,23 +274,98 @@
             navMenu.classList.toggle('active');
         });
 
-        // Add to cart functionality
+        // Add to cart functionality with animation
         document.querySelectorAll('.buy-button').forEach(button => {
             button.addEventListener('click', function() {
                 const productName = this.parentElement.querySelector('h3').textContent;
-                alert(`Added ${productName} to cart!`);
                 
-                // Change button text temporarily
+                // Create floating notification
+                const notification = document.createElement('div');
+                notification.innerHTML = `✓ Added ${productName} to cart!`;
+                notification.style.cssText = `
+                    position: fixed; top: 20px; right: 20px; background: #27ae60;
+                    color: white; padding: 15px 25px; border-radius: 25px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000;
+                    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+                    font-weight: 500;
+                `;
+                document.body.appendChild(notification);
+                
+                // Remove notification after 3 seconds
+                setTimeout(() => document.body.removeChild(notification), 3000);
+                
+                // Button animation
                 const originalText = this.textContent;
-                this.textContent = 'Added!';
+                this.textContent = 'Added! ✓';
                 this.style.background = '#27ae60';
+                this.style.transform = 'scale(0.95)';
                 
                 setTimeout(() => {
                     this.textContent = originalText;
                     this.style.background = '';
+                    this.style.transform = '';
                 }, 2000);
             });
         });
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                to { opacity: 0; transform: translateX(100%); }
+            }
+            .product-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .product-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            }
+            .testimonials {
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                padding: 80px 0;
+            }
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 50px;
+            }
+            .testimonial-card {
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+            .testimonial-card:hover {
+                transform: translateY(-5px);
+            }
+            .stars {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            .customer-info {
+                margin-top: 20px;
+                border-top: 1px solid #eee;
+                padding-top: 15px;
+            }
+            .customer-info strong {
+                display: block;
+                color: #4a7c59;
+                margin-bottom: 5px;
+            }
+            .customer-info span {
+                color: #666;
+                font-size: 14px;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

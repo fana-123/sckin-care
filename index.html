@@ -228,6 +228,43 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Customer Reviews</h2>
+            <p class="section-subtitle">Waxa macaamiisheenu ka yiraahdaan</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"SHAAX skincare changed my life! My skin is glowing and healthy."</p>
+                    <p class="somali-text">"SHAAX ayaa noloshayda beddelay! Maqaarkaygu waa dhalaalaya oo caafimaad qaba."</p>
+                    <div class="customer-info">
+                        <strong>Sahra Mohamed</strong>
+                        <span>Berbera, Somaliland</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Natural ingredients that work! I recommend SHAAX to everyone."</p>
+                    <p class="somali-text">"Alaabta dabiiciga ah oo shaqeysa! Waxaan ku talinayaa SHAAX qof walba."</p>
+                    <div class="customer-info">
+                        <strong>Hodan Ali</strong>
+                        <span>Erigavo, Somaliland</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Best investment for my skin. Quality products made locally!"</p>
+                    <p class="somali-text">"Maalgashiga ugu fiican ee maqaarkayga. Alaab tayo sare ah oo maxalli laga sameeyay!"</p>
+                    <div class="customer-info">
+                        <strong>Maryam Jama</strong>
+                        <span>Burao, Somaliland</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -407,23 +444,116 @@
             }, 5000);
         }
 
-        // Add to cart functionality
+        // Add to cart functionality with enhanced animations
         document.querySelectorAll('.buy-button').forEach(button => {
             button.addEventListener('click', function() {
                 const productName = this.parentElement.querySelector('h3').textContent;
-                showNotification(`Added ${productName} to cart!`, 'success');
                 
-                // Change button text temporarily
+                // Create success notification
+                showNotification(`✓ Added ${productName} to cart!`, 'success');
+                
+                // Button animation
                 const originalText = this.textContent;
-                this.textContent = 'Added!';
+                this.textContent = 'Added! ✓';
                 this.style.background = '#27ae60';
+                this.style.transform = 'scale(0.95)';
                 
                 setTimeout(() => {
                     this.textContent = originalText;
                     this.style.background = '';
+                    this.style.transform = '';
                 }, 2000);
             });
         });
+        
+        // Add modern styling
+        const modernStyle = document.createElement('style');
+        modernStyle.textContent = `
+            .product-card {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .product-card:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            }
+            .testimonials {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 100px 0;
+            }
+            .testimonials h2 {
+                color: white;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .testimonials .section-subtitle {
+                text-align: center;
+                color: rgba(255,255,255,0.8);
+            }
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 40px;
+                margin-top: 60px;
+            }
+            .testimonial-card {
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(10px);
+                padding: 40px;
+                border-radius: 20px;
+                border: 1px solid rgba(255,255,255,0.2);
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            .testimonial-card:hover {
+                transform: translateY(-10px);
+                background: rgba(255,255,255,0.15);
+            }
+            .stars {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+            .testimonial-card p {
+                color: white;
+                line-height: 1.6;
+                margin-bottom: 15px;
+            }
+            .customer-info {
+                margin-top: 25px;
+                border-top: 1px solid rgba(255,255,255,0.2);
+                padding-top: 20px;
+            }
+            .customer-info strong {
+                display: block;
+                color: #fff;
+                margin-bottom: 8px;
+                font-size: 18px;
+            }
+            .customer-info span {
+                color: rgba(255,255,255,0.7);
+                font-size: 14px;
+            }
+            .hero-stats .stat-item {
+                animation: fadeInUp 0.6s ease forwards;
+            }
+            .hero-stats .stat-item:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .hero-stats .stat-item:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(modernStyle);
 
         // Scroll animations
         const observerOptions = {
